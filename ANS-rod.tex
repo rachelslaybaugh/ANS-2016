@@ -4,7 +4,7 @@
 \author{Richard Vasques$^{*}$, Rachel Slaybaugh$^{*}$, Kai Krycki$^{\dagger}$}
 
 \institute{
-$^{*}$Dept. of Nuclear Engineering, University of California, Berkeley, 4103 Etcheverry Hall, MC 1730,
+$^{*}$Dept. of Nuclear Engineering, University of California, Berkeley, 4103 Etcheverry Hall, 
 Berkeley, CA 94720-1730
 \and
 $^{\dagger}$ TBD, Germany
@@ -145,7 +145,9 @@ and equating the coefficients of different powers of $\varepsilon$, we obtain fo
       & \,\,\,\,\,\,\,\,\,\,\,\,\,\,+ \delta_{n,2} \bl s\bg \frac{Q( x)}{2} \,, 
    \nonumber
    \end{align}
-with $\hat\psi_{n-1}^\pm=\hat\psi_{n-2}^\pm=0$. Equation \eqref{6} with $n=0$ has the general solution
+with $\hat\psi_{n-1}^\pm=\hat\psi_{n-2}^\pm=0$.
+% Why is this true? Is it always true or just for n < 2? If always, what about other values? It makes the ansatz seem a little weird and I don't see why the terms or there or how you get the pgeneral solution with n=1? Maybe I'm missing something? 
+ Equation \eqref{6} with $n=0$ has the general solution
    \begin{equation}
       \hat\psi_0^\pm(x, s) = \frac{\hat\phi_0(x)}{2} \,, \nonumber
    \end{equation}
@@ -188,7 +190,7 @@ As expected, if $p(s)$ is given by Eq.\ \eqref{3}, $\bl s\bg = 1/\Sigma_t$, $\bl
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The 1-D Random Periodic System}
-Let us consider an \textit{infinite rod} consisting of periodically arranged solid and void layers of same length, given by $\ell=1$.
+Let us consider an \textit{infinite rod} consisting of periodically arranged solid and void layers of equal width, given by $\ell=1$.
 We are interested in a \textit{finite random periodic system} with total width given by $2X = 2\ell M$, where $M$ (the total length of each material in the system) satisfies $M = \varepsilon^{-1}$. Random realizations of this system can be obtained by randomly selecting any continuous $2X$ segment of the infinite rod described above. Vacuum boundary conditions are assigned at $x=\pm X$. 
 
 In this finite random periodic system, the cross sections and source are stochastic functions of space. For the numerical results provided in this paper, we define the parameters at each spatial point $x$ in the system by
@@ -238,7 +240,10 @@ Following the procedure described in \cite{vas15}, we rewrite Eq.\ \eqref{1} in 
 & \hspace{50pt}+ \frac{\bl Q\bg}{2}. \nonumber
 \end{align}
 \end{subequations}
-We then adapt the HLL finite volume method introduced in \cite{kry13}; this method is of first order in the pseudo-time variable $s$ and in the spatial variable $x$. In our calculations, we have cut off the integration at $s_{\text{max}}=80$, and have chosen the trapezoidal rule. We have used the mesh interval $\triangle x=2^{-7}$, and a CFL number $0.5$. This system is solved in a source-iteration manner, where we iterate between the discretized forms of Eq.\ \eqref{9b} and Eq.\ \eqref{9a}. The ensemble-averaged nonclassical scalar flux is given by $\Phi(x) = \int_0^{80}[\psi^+(x,s)+\psi^-(x,s)]ds$.
+We then adapt the HLL finite volume method introduced in \cite{kry13}; this method is of first order in the pseudo-time variable $s$ and in the spatial variable $x$. In our calculations, we have cut off the integration at $s_{\text{max}}=80$, and have chosen the trapezoidal rule. We have used the mesh interval $\triangle x=2^{-7}$, and a CFL number $0.5$. 
+% really 2^{-7} or 2 \times 10^{-7}? Wanting to double check. 
+% I think it's okay, but the reviewers might want definitions of HLL and CFL?
+This system is solved in a source-iteration manner, where we iterate between the discretized forms of Eq.\ \eqref{9b} and Eq.\ \eqref{9a}. The ensemble-averaged nonclassical scalar flux is given by $\Phi(x) = \int_0^{80}[\psi^+(x,s)+\psi^-(x,s)]ds$.
 
 We consider three different problems, with $M=10, 20,$ and $40$. As $M$ increases, we expect the solution of Eq.\ \eqref{1} to converge to the
 solution of the nonclassical diffusion formulation given by Eq.\ \eqref{7}. Since our asymptotic analysis does not include boundary conditions, we solve Eq.\ \eqref{7} using the extrapolated endpoint boundary conditions, taking the extrapolation distance to be twice the diffusion coefficient:
@@ -249,24 +254,26 @@ solution of the nonclassical diffusion formulation given by Eq.\ \eqref{7}. Sinc
 As anticipated, the solutions plotted in Figures \ref{fig1}, \ref{fig2}, and \ref{fig3} confirm our claim: the nonclassical scalar flux and the nonclassical \textit{diffusion} scalar flux increasingly agree as $M$ increases and the system approaches the diffusive limit.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
-  \centering
-  \includegraphics{example_figure}
-  \caption{Placeholder.}
-  \label{fig1}
-\end{figure}
-\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
-  \centering
-  \includegraphics{example_figure}
-  \caption{Placeholder.}
-  \label{fig2}
-\end{figure}
-\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
-  \centering
-  \includegraphics{example_figure}
-  \caption{Placeholder.}
-  \label{fig3}
-\end{figure}
+%\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
+%  \centering
+%  \includegraphics{example_figure}
+%  \caption{Placeholder.}
+%  \label{fig1}
+%\end{figure}
+%\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
+%  \centering
+%  \includegraphics{example_figure}
+%  \caption{Placeholder.}
+%  \label{fig2}
+%\end{figure}
+%\begin{figure}[ht] % replace 't' with 'b' to force it to be on the bottom
+%  \centering
+%  \includegraphics{example_figure}
+%  \caption{Placeholder.}
+%  \label{fig3}
+%\end{figure}
+
+% you  need to add any figures to the repo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
@@ -275,10 +282,11 @@ in which to improve this theory for relevant nuclear applications.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
-This paper was prepared by Richard Vasques and Rachel Slaybaugh under award number NRC-HQ-84-14-G-0052 from the Nuclear Regulatory Commission. The statements, findings, conclusions, and recommendations are those of the authors and do not necessarily reflect the view of the US Nuclear Regulatory Commission.
+This paper was prepared by Richard Vasques and Rachel Slaybaugh under award number NRC-HQ-84-14-G-0052 from the Nuclear Regulatory Commission. The statements, findings, conclusions, and recommendations are those of the authors and do not necessarily reflect the view of the U.S.\ Nuclear Regulatory Commission.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{ans}
+% you need to add ans.bst to the to the repo.
 \bibliography{bibliography.bib}
 \end{document}
 
