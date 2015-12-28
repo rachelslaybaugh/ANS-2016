@@ -1,0 +1,230 @@
+\documentclass{anstrans}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Nonclassical Particle Transport in the 1-D Diffusive Limit}
+\author{Richard Vasques$^{*}$, Rachel Slaybaugh$^{*}$, Kai Krycki$^{\dagger}$}
+
+\institute{
+$^{*}$Dept. of Nuclear Engineering, University of California, Berkeley, 4103 Etcheverry Hall, MC 1730,
+Berkeley, CA 94720-1730
+\and
+$^{\dagger}$ TBD, Germany
+}
+
+\email{richard.vasques@fulbrightmail.org \and slaybaugh@berkeley.edu \and TBD}
+
+% Optional disclaimer: remove this command to hide
+%\disclaimer{Notice: this manuscript is a work of fiction. Any resemblance to
+%actual articles, living or dead, is purely coincidental.}
+
+%%%% packages and definitions (optional)
+\usepackage{graphicx} % allows inclusion of graphics
+\usepackage{booktabs} % nice rules (thick lines) for tables
+\usepackage{microtype} % improves typography for PDF
+
+\newcommand{\SN}{S$_N$}
+\renewcommand{\vec}[1]{\bm{#1}} %vector is bold italic
+\newcommand{\vd}{\bm{\cdot}} % slightly bold vector dot
+\newcommand{\grad}{\vec{\nabla}} % gradient
+\newcommand{\ud}{\mathop{}\!\mathrm{d}} % upright derivative symbol
+
+\newcommand{\bl}{\big<}
+ \newcommand{\bg}{\big>}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\ux}{{\bf x}}
+\newcommand{\un}{{\bf n}}
+\newcommand{\uomega}{{\bf \Omega}}
+\newcommand{\unabla}{{\bf \nabla}}
+\newcommand{\ul}{\underline}
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+A \textit{nonclassical linear Boltzmann equation} has been recently proposed  to address nonexponential atenuation of the particle flux  in certain inhomogeneous random media applications [REF]. In particular, this effect arises in Pebble Bed reactor cores,  in which the locations of the pebbles are spatially correlated [REF]. 
+
+For monoenergetic particle transport with isotropic scattering, the 1-D nonclassical linear Boltzmann equation is written as
+\begin{align}
+\label{eq1}
+&\frac{\partial\psi}{\partial s}(x,\mu,s) + \mu\frac{\partial\psi}{\partial x} (x,\mu,s) + \Sigma_t(\mu,s)\psi(x,\mu,s)\\
+&\,\,= \frac{\delta(s)}{2}\left[ c\int_{-1}^1\int_0^\infty \Sigma_t(\mu',s')\psi(x,\mu',s')ds' d\mu' + Q(x) \right], \nonumber
+\end{align}
+where $x =$ position, $\mu = $ direction of flight, $s =$ the path-length traveled by the particle since its previous
+interaction (birth or scattering), $\psi$ is the nonclassical angular flux, $c$ is the scattering ratio (probability of scattering), and $Q(x)$ is an isotropic internal source. The function $\Sigma_t(\mu,s)$ represents the collision probability in a given direction $\mu$ (ensemble-averaged over all possible physical realizations of the system), such that
+\begin{equation}
+\Sigma_t(\mu,s)ds = \begin{array}{l}
+\text{the probability that a particle, scattered or}\\
+\text{born at any point $x$ and traveling in the}\\
+\text{direction $\mu$, will experience a collision}\\
+\text{between $ x + s\mu$ and $x + (s+ds)\mu$.}
+\end{array} \nonumber
+ \end{equation}
+In this situation, the \textit{conditional} probability density function for a particle's distance-to-collision \textit{in a given direction} $\mu$ is given by
+\begin{equation}\label{eq2}
+p(\mu,s) = \Sigma_t(\mu,s)e^{-\int_0^s \Sigma_t(\mu,s')ds'},
+\end{equation}
+such that its $m^{th}$ moment is defined as
+\begin{align}\label{eq3}
+\overline s_m(\mu) = \int_0^{\infty} s^mp(\mu,s)ds\,.
+\end{align}
+Due to the isotropic characteristic of the problem, the probability that a particle is traveling in $d\mu$ about $\mu$ is given by $d\mu/2$, and the $m^{th}$ moment for a particle's distance-to-collision can be written as
+\begin{align}\label{eq4}
+\bl s^m \bg = \int_{-1}^1\frac{1}{2}\int_0^{\infty}s^mp(\mu,s)dsd\mu = \frac{1}{2}\int_{-1}^1\overline s_m(\mu)d\mu\,.
+\end{align}
+If $\Sigma_t(\mu,s) = \Sigma_t = $ constant (classical total cross section), we obtain the exponential
+\begin{equation}\label{eq5}
+p(\mu,s) = p(s) = \Sigma_t e^{-\Sigma_ts},
+\end{equation}
+and Eq.\eqref{eq1} reduces to the classical linear Boltzmann equation
+\begin{equation}
+\label{eq6}
+\mu\frac{\partial \Psi}{\partial x}(x,\mu) + \Sigma_t \Psi(x,\mu) = \frac{\Sigma_s}{2}\int_{-1}^1\Psi(x,\mu')d\mu'+ \frac{Q(x)}{2}
+\end{equation}
+for the classical angular flux 
+\begin{equation}
+\label{eq7}
+\Psi(x,\mu) = \int_0^\infty \psi(x,\mu,s)ds.
+\end{equation} 
+
+It has been shown that, in the case of standard diffusion $\left(\int_0^{\infty} s^2p(s)ds < \infty\right)$,  Eq.\eqref{eq1} has a straightforward asymptotic diffusion limit.  
+
+*************************
+
+DESCRIPTION OF DIFFUSIVE SYSTEM
+
+***********************
+
+In this paper, we investigate nonclassical particle transport taking place in a 1-D random periodic diffusive system. We provide computational results demonstrating for the first time that the solution of the nonclassical particle
+transport equation is well-approximated by the solution of the nonclassical diffusion equation. In all cases, these
+simulations show that for transport problems in the diffusive limit described above, the numerical results closely agree with the predictions of the asymptotic theory. 
+
+The remainder of this paper is organized as follows.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asymptotic Analysis}
+Following REF,  we scale $\Sigma_t = O(1)$, 
+$ 1-c = O(\varepsilon^2) $, $Q=O(\varepsilon^2)$,  $\partial \psi / \partial s = O(1)$, and $\mu \partial \psi/\partial x = O(\eps)$, with $\varepsilon \ll 1$. In this scaling, Eq.\ \eqref{eq1} yields
+  \begin{align}
+    &\frac{\partial \psi}{\partial s}  (x, \mu,s) 
+      + \eps\mu\frac{\partial\psi}{\partial x}(x, \mu, s)
+       + \Sigma_t(\mu,s) \psi( x, \mu, s)   \label{eq8}\\
+   & \,\,= \frac{\delta(s)}{2}\int_{-1}^1\int_0^{\infty}[1-\eps^2(1-c)]\Sigma_t(\mu',s') 
+      \psi(x, \mu', s') \, ds' d\mu' + \nonumber \\
+     &\,\,\,\,\,\,\,\, + \varepsilon^2 \delta(s)\frac{Q(x)}{2} \,.
+ \nonumber
+  \end{align}
+Let us define $\hat\psi(\bm x, \bm \Omega, s)$ such that
+  \begin{align}\label{eq9}
+   \psi( x, \mu, s) &\equiv 
+          \hat\psi(\bm x, \mu, s) \frac{e^{-\int_0^s \Sigma_t(\mu,s') ds'}}{\bl s\bg}\,.
+  \end{align}
+Then, using Eq.\ \eqref{eq2}, Eq.\ \eqref{eq8} becomes the following equation for $\hat\psi(x, \mu, s)$:
+  \begin{align}\label{eq10}
+    &\frac{\partial \hat\psi}{\partial s} (x, \mu,s) 
+      + \varepsilon \mu\frac{\partial\hat\psi}{\partial x}(x,\mu, s)  \\
+   & \,\,= \frac{\delta(s)}{2} \int_{-1}^1 \int_0^{\infty} [1-\eps^2(1-c)] p(\mu',s')
+      \hat\psi(x, \mu', s') \, ds' d\mu'\nonumber\\
+      & \,\,\,\,\,\,\,\,
+      + \varepsilon^2 \delta(s) \bl s\bg \frac{Q(x)}{2} \,.\nonumber 
+  \end{align}
+This equation is mathematically equivalent to:
+   \begin{subequations}
+   \begin{align}
+      &\frac{\partial \hat\psi}{\partial s} (x, \mu,s) 
+         + \varepsilon \mu\frac{\partial\hat\psi}{\partial x}(x, \mu, s) = 0 \,, \quad s > 0 \,,\label{eq11a}\\
+       &\hat\psi(x, \mu, 0)  =\\
+       &\,\,=\frac{1}{2}\int_{-1}^1 [1-\eps^2(1-c)] \int_0^{\infty} p(\mu',s')
+\hat\psi(x, \mu', s') ds' d\mu' + \nonumber\\
+         &\,\,\,\,\,\,\, + \varepsilon^2 \bl s\bg \frac{Q(x)}{2} \,,\nonumber
+   \end{align}
+   \end{subequations}
+where $\hat\psi(x,\mu,0) = \hat\psi(x,\mu,0^+)$. Integrating Eq.\ \eqref{eq10a} over $0 < s' < s$, we obtain:
+   \begin{align}
+      &\hat\psi( x, \mu, s)  = \hat\psi(x,\mu, 0) - \varepsilon \mu\frac{\partial}{\partial x} \int_0^s \hat\psi(x, \mu, s') \, ds' \\
+      & \,\, = \frac{1}{2}\int_{-1}^1 [1-\eps^2(1-c)] \int_0^{\infty} p(\mu',s')
+\hat\psi(x, \mu', s') ds' d\mu' + \nonumber\\
+         &\,\,\,\,\,\,\, + \varepsilon^2 \bl s\bg \frac{Q(x)}{2} - \varepsilon \mu\frac{\partial}{\partial x} \int_0^s \hat\psi(x, \mu, s') \, ds' \,.\nonumber
+   \end{align}
+Introducing into this equation the ansatz 
+   \begin{equation}
+ \hat\psi(x, \mu, s) =  \sum_{n=0}^{\infty} \varepsilon^n
+       \hat\psi_n(x, \mu, s) 
+       \end{equation}
+and equating the coefficients of different powers of $\varepsilon$, we obtain for $n \ge 0$:
+   \begin{align}
+&      \hat\psi_n(x,\mu, s)  = \frac{1}{2}\int_{-1}^1 \int_0^{\infty} p(\mu',s')
+\hat\psi_n(x, \mu', s') ds' d\mu' \label{eq14}\\
+&\,\,\, - \mu\frac{\partial}{\partial x} \int_0^s \hat\psi_{n-1}(x, \mu, s') \, ds' \nonumber \\
+& \,\,\,\,\,\,\,\,\, -\frac{1-c}{2}\int_{-1}^1 \int_0^{\infty} p(\mu',s')
+\hat\psi_{n-2}(x, \mu', s') ds' d\mu' \nonumber\\   
+      & \,\,\,\,\,\,\,\,\,\,\,\,\,\,+ \delta_{n,2} \bl s\bg \frac{Q( x)}{2} \,, 
+   \nonumber
+   \end{align}
+with $\hat\psi_{n-1}=\hat\psi_{n-2}=0$. Equation \eqref{eq14} with $n=0$ has the general solution
+   \begin{equation}
+      \hat\psi_0(x, \mu, s) = \frac{\hat\phi_0(x)}{2} \,,
+   \end{equation}
+where $\hat\phi_0(x)$ is undetermined at this point. For $n=1$,
+Eq.\ \eqref{eq14} has a particular solution of the form:
+    \begin{equation}
+      \hat\psi^{part}_1(x, \mu, s) = - \frac{s\mu}{2}\frac{d \hat\phi_0}{d x}(x) \,,
+   \end{equation}   
+and its general solution is given by 
+   \begin{equation}
+      \hat\psi_1( x, \mu, s) =  \frac{1}{2}\left[\hat\phi_1( x) - s\mu\frac{d \hat\phi_0}{d x}(x)\right] \,,
+   \label{eq17}
+  \end{equation}  
+where $\hat\phi_1(x)$ is undetermined.
+
+ Equation \eqref{eq14} with $n=2$ has a solvability condition, which is obtained by operating on it by $\int_{-1}^1\int_0^{\infty} p(\mu,s) ( \cdot ) ds d\mu$; the solvability condition yields
+   \begin{align}\label{eq18}
+      0 &= \frac{1}{2}\int_{-1}^1\int_0^{\infty}p(\mu,s)\left(\frac{(s\mu)^2}{2} \frac{d^2\hat\phi_0}{dx^2}(x)\right)ds d\mu\\
+          & \,\,\,\,\, - \frac{1-c}{2} \int_{-1}^1\int_0^{\infty} p(\mu,s) \hat\phi_0( x) \, ds d\mu + \bl s\bg Q( x)\,.\nonumber 
+   \end{align}
+Thus, using the fact that $\overline s_0(\mu)=1$,
+we can rewrite Eq.\ \eqref{eq18} as:
+\begin{subequations}\label{eq19}
+\begin{align}
+      -\text{D}\frac{d^2\hat\phi_0}{dx^2}(x) + \frac{1-c}{\bl s\bg } \hat\phi_0(x) = Q(x)\,,\label{eq19a}
+      \end{align}
+      where D is the nonclassical diffusion coefficient given by
+      \begin{align}
+      \text{D} = \frac{1}{4\bl s\bg}\int_{-1}^1\mu^2 \overline s_2(\mu)d\mu \, .
+   \end{align}
+   \end{subequations}
+
+Therefore, the solution $\psi(x, \mu, s)$ of Eq.\ \eqref{eq8} satisfies
+   \begin{equation}\label{eq20}
+      \psi(x, \mu, s) = \frac{\hat\phi_0(x)}{2} \frac{e^{- \int_0^s \Sigma_t(\mu, s') ds'}} 
+         {\bl s\bg} + O(\varepsilon) \,,
+   \end{equation} 
+where $\hat\phi_0(x)$ satisfies Eqs.\ \eqref{eq19}. The classical angular flux can be obtained to leading order by integrating Eq.\ \eqref{eq20} over $0 < s < \infty$:
+   \begin{align}
+   \Psi(x, \mu) = \int_0^{\infty}\psi(x,\mu,s)ds = \frac{\hat\phi_0(x)}{2}\frac{\overline s_1(\mu)}{\bl s\bg} + O(\varepsilon) \,.
+   \label{5.26}
+   \end{align}
+
+As expected, if $p(s)$ is given by Eq.\ \eqref{eq5}, $\bl s\bg = 1/\Sigma_t$, $\bl s^2\bg = 2/\Sigma_t^2$, and it is easy to verify that Eq.\ \eqref{eq19a} reduces to the classical diffusion equation
+\begin{align}
+ -\frac{1}{3\Sigma_t}\frac{d^2\hat\phi_0}{dx^2}(x) + \Sigma_a \hat\phi_0(x) = Q(x)\,.
+\end{align}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Numerical Results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{ans}
+\bibliography{bibliography.bib}
+\end{document}
+
